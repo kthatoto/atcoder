@@ -1,0 +1,34 @@
+#!/Users/kthatoto/.anyenv/envs/crenv/shims/crystal
+`git add -A`
+new_files = `git status | grep 'new file'`
+edit_files = `git status | grep 'modified'`
+
+new_files = new_files.split("\n\t").map do |line|
+  line.delete("\n").delete("\t").delete(" ").split(":").last
+end
+edit_files = edit_files.split("\n\t").map do |line|
+  line.delete("\n").delete("\t").delete(" ").split(":").last
+end
+
+puts "new_files:"
+new_files.each {|line| puts "  #{line}"}
+puts
+puts "edit_files:"
+edit_files.each {|line| puts "  #{line}"}
+puts
+print "y/N: "
+
+answer = read_line.to_s
+`git reset .`
+if ["y", "Y", "yes", "Yes", "YES"].includes?(answer)
+  new_files.each do |line|
+    `git add #{line}`
+    `git commit -m 'Add #{line}'`
+  end
+  edit_files.each do |line|
+    `git add #{line}`
+    `git commit -m 'Edit #{line}'`
+  end
+else
+  puts "aborted"
+end
