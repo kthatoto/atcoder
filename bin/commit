@@ -10,6 +10,9 @@ edit_files = edit_files.split("\n\t").map do |line|
   line.delete("\n").delete("\t").delete(" ").split(":").last
 end
 
+new_files = new_files.select {|line| line.presence}
+edit_files = edit_files.select {|line| line.presence}
+
 puts "new_files:"
 new_files.each {|line| puts "  #{line}"}
 puts
