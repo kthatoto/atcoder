@@ -1,5 +1,9 @@
 x = read_line.to_i
-
+if x == 2
+  puts 2
+  exit
+end
+x += 1 if x % 2 == 0
 while true
   d = 3
   divided = false
@@ -12,8 +16,7 @@ while true
   end
 
   break unless divided
-
-  x += (x % 2 == 0) ? 1 : 2
+  x += 2
 end
 
 puts x
