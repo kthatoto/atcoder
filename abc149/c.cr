@@ -1,8 +1,6 @@
 x = read_line.to_i
 
 while true
-  x += (x % 2 == 0) ? 1 : 2
-
   d = 3
   divided = false
   while d <= Math.sqrt(x)
@@ -14,6 +12,8 @@ while true
   end
 
   break unless divided
+
+  x += (x % 2 == 0) ? 1 : 2
 end
 
 puts x
