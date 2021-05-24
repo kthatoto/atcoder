@@ -42,10 +42,10 @@ elsif !dir_exists && !file_exists
 end
 
 answer = read_line.to_s
-if answer.includes?("y")
+if answer == "n"
+  puts yellow "aborted\n"
+else
   `mkdir #{contest}` unless dir_exists
   `touch #{contest}/#{problem}`
   puts green "created!\n"
-else
-  puts yellow "aborted\n"
 end
