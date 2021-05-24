@@ -19,11 +19,13 @@ puts
 puts "edit_files:"
 edit_files.each {|line| puts "  #{line}"}
 puts
-print "y/N: "
+print "Y/n: "
 
 answer = read_line.to_s
 `git reset .`
-if ["y", "Y", "yes", "Yes", "YES"].includes?(answer)
+if answer == "n"
+  puts "aborted"
+else
   new_files.each do |line|
     `git add #{line}`
     `git commit -m 'Add #{line}'`
@@ -34,6 +36,4 @@ if ["y", "Y", "yes", "Yes", "YES"].includes?(answer)
     `git commit -m 'Edit #{line}'`
     puts "Edit #{line}"
   end
-else
-  puts "aborted"
 end
