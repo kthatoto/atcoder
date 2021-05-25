@@ -34,7 +34,7 @@ if dir_exists && file_exists
 elsif dir_exists && !file_exists
   puts yellow "'#{contest}' already exists"
   puts green "'#{contest}/#{problem}' will be created"
-  print "y/N: "
+  print "Y/n: "
 elsif !dir_exists && !file_exists
   puts green "'#{contest}' will be created"
   puts green "'#{contest}/#{problem}' will be created"
