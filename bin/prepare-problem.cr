@@ -34,13 +34,12 @@ if dir_exists && file_exists
 elsif dir_exists && !file_exists
   puts yellow "'#{contest}' already exists"
   puts green "'#{contest}/#{problem}' will be created"
-  print "Y/n: "
 elsif !dir_exists && !file_exists
   puts green "'#{contest}' will be created"
   puts green "'#{contest}/#{problem}' will be created"
-  print "y/N: "
 end
 
+print "Y/n: "
 answer = read_line.to_s
 if answer == "n"
   puts yellow "aborted\n"
