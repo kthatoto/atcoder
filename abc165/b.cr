@@ -1,9 +1,11 @@
-x = read_line.to_i64
+require "big"
 
-y = 100_i64
+x = read_line.to_big_i
+y = 100.to_big_i
 n = 0
+
 while y < x
-  y = (y * 1.01).to_i64
+  y += (y / 100).to_big_i
   n += 1
 end
 
