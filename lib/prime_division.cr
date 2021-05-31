@@ -13,5 +13,6 @@ def prime_division(n : UInt64) : Hash(UInt64, UInt64)
     m += m == 2 ? 1 : 2
   end
 
-  result.size > 0 ? result : { n => 1_u64 }
+  result[i] = 1_u64 if i > 1
+  result
 end
