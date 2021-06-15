@@ -26,6 +26,6 @@ q.times do
     break if border == 0
   end
 
-  lcount = a[border] - (border + 1)
-  puts a[border] + (k - lcount)
+  lcount = a[border - 1] - border
+  puts a[border - 1] + (k - lcount)
 end
