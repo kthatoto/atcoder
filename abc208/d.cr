@@ -1,11 +1,5 @@
 n, m = read_line.split.map(&.to_i64)
 
-# {
-#   1: {
-#     2: 3,
-#     3: 4,
-#   }
-# }
 roads = Hash(Int64, Hash(Int64, Int64)).new
 (1..m).map do
   a, b, c = read_line.split.map(&.to_i64)
@@ -13,14 +7,6 @@ roads = Hash(Int64, Hash(Int64, Int64)).new
   roads[a][b] = c
 end
 
-# {
-#   1: {
-#     3: [
-#       { cost: 5, visited: [2] },
-#       { cost: 4, visited: [4] },
-#     ]
-#   }
-# }
 costs = Hash(Int64,
           Hash(Int64,
             Array(
@@ -34,19 +20,12 @@ costs = Hash(Int64,
   costs[a] = Hash(Int64, Array( Hash(Symbol, Int64 | Array(Int64)) ) ).new
   (1..n).each do |b|
     b = b.to_i64
+    next if a == b
     next unless roads[a]?
-    # [
-    #   { curr: 2, cost: 3, visited: [4] },
-    #   { curr: 3, cost: 5, visited: [4, 3] },
-    # ]
     cands = roads[a].map do |n, cost|
       { curr: n, cost: cost, visited: [] of Int64 }
     end
 
-#   [
-#     { cost: 5, visited: [2] },
-#     { cost: 4, visited: [4] },
-#   ]
     reaches = [] of Hash(Symbol, Int64 | Array(Int64))
     while cands.size > 0
       new_cands = [] of Hash(Symbol, Int64 | Array(Int64))
@@ -57,7 +36,6 @@ costs = Hash(Int64,
           next
         end
 
-        # { 2: <cost>, 3: <cost> }
         curr_roads = roads[cand[:curr]]?
         next if curr_roads.nil?
         curr_roads.each do |n, cost|
@@ -65,7 +43,7 @@ costs = Hash(Int64,
           new_cands.push({
             :curr => n,
             :cost => cand[:cost].as(Int64) + cost,
-            :visited => cand[:visited].as(Array(Int64)).concat([cand[:curr].as(Int64)])
+            :visited => cand[:visited].as(Array(Int64)) + [cand[:curr].as(Int64)]
           })
         end
       end
